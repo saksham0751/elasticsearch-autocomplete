@@ -8,7 +8,7 @@ class AutoComplete(object):
     def __init__(self, es, doc_type, index, max_limit, config, *args, **kwargs):
         self.doc_type = doc_type
         self.es = es
-        self.index = index.format(doc_type).lower()
+        self.index = index
         self.max_limit = max_limit
         self.config = config
         self.args = args
