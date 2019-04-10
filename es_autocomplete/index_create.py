@@ -1,5 +1,5 @@
 import json
-from elasticsearch import AutoComplete
+from es_autocomplete.elasticsearch import AutoComplete
 
 
 class CreateIndex(object):
