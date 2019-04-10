@@ -1,7 +1,7 @@
 from elasticsearch import helpers
 from elasticsearch_dsl import Search
 from elasticsearch_dsl import Q
-from indexer import ESIndexer
+from elasticsearchautocomplete.indexer import ESIndexer
 
 class AutoComplete(object):
 
