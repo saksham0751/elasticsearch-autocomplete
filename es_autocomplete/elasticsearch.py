@@ -51,7 +51,7 @@ class AutoComplete(object):
             q = Q("multi_match", query=string, fields=fields)
             s = s.query(q)
         for key, value in filter_dict.items():
-            if isinstance(value, (str, unicode, int)):
+            if isinstance(value, (str, unicode, int, bool)):
                 s.filter("term", **{key: str(value).lower()})
             elif isinstance(value, list):
                 value = map(lambda x: str(x).lower(), value)

@@ -2,7 +2,6 @@ from elasticsearch import helpers
 
 
 def expand_action(data, **kwargs):
-    # make sure we don't alter the action
     data = data.copy()
     op_type = getattr(expand_action, 'op_type', 'index')
     doc_type = getattr(expand_action, 'doc_type', None)
@@ -26,10 +25,8 @@ def expand_action(data, **kwargs):
         try:
             method(app, model_name, data, **extra)
         except IndexError:
-            # eat it
             pass
 
-    # no data payload for delete
     if op_type == 'delete':
         payload = None
     elif op_type == 'update':
