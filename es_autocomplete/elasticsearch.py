@@ -67,8 +67,6 @@ class AutoComplete(object):
         data = result.get('data', {})
         for each in data:
             source = each.pop('_source')
-            for i in source.keys():
-                source[i] = [source[i]]
             each['fields'] = source
         return data
 
