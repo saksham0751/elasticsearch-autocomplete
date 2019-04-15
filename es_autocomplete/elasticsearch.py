@@ -45,18 +45,18 @@ class AutoComplete(object):
         count = self.max_limit
         filter_dict = kwargs.get('filter_dict', {})
         es = self.es
-        s = Search(using=es, index=self.index, doc_type=self.doc_type)
-        s = s[0:count]
+        search = Search(using=es, index=self.index, doc_type=self.doc_type)
+        search = search[0:count]
         if string:
             q = Q("multi_match", query=string, fields=fields)
-            s = s.query(q)
+            search = search.query(q)
         for key, value in filter_dict.items():
-            if isinstance(value, (str, unicode, int, bool)):
-                s.filter("term", **{key: str(value).lower()})
+            if isinstance(value, (str, int, bool)):
+                search = search.filter("term", **{key: str(value).lower()})
             elif isinstance(value, list):
                 value = map(lambda x: str(x).lower(), value)
-                s.filter("terms", **{key: value})
-        r = s.execute()
+                search = search.filter("terms", **{key: value})
+        r = search.execute()
         r = r.to_dict()
         count = r['hits']['total']
         docs = r['hits']['hits']
@@ -77,4 +77,3 @@ class AutoComplete(object):
     def delete(self, instances):
         self.set_attr('delete')
         return self.es_indexer.sync(docs=instances)
-
