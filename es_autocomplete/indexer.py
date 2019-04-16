@@ -57,18 +57,8 @@ class ESIndexer(object):
         expand_action.app = self.app
         expand_action.index = self.index
         if docs is not None and isinstance(docs, list):
-            self.docs = self._get_list_of_dict(docs)
+            self.docs = docs
             self.helpers.bulk(
                 self.es, actions=self.docs,
                 index=self.index, doc_type=self.doc_type,
                 expand_action_callback=expand_action)
-
-    def _get_list_of_dict(self, docs):
-        data_list = []
-        for each in docs:
-            data_dict = {}
-            for field in self.fields:
-                data_dict[field] = getattr(each, field)
-            data_list.append(data_dict)
-        return data_list
-
