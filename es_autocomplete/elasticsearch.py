@@ -55,6 +55,7 @@ class AutoComplete(object):
                 search = search.filter("term", **{key: str(value).lower()})
             elif isinstance(value, list):
                 value = map(lambda x: str(x).lower(), value)
+                value = list(set([str(each).lower() for each in value]))
                 search = search.filter("terms", **{key: value})
         r = search.execute()
         r = r.to_dict()
