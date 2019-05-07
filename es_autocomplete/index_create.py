@@ -1,5 +1,4 @@
 import json
-from es_autocomplete.elasticsearch import AutoComplete
 
 
 class CreateIndex(object):
@@ -25,6 +24,4 @@ class CreateIndex(object):
             index=self.index,
             doc_type=self.doc_type,
             body=json.dumps(mapping))
-
-        AutoComplete(es, self.doc_type, self.index, self.max_limit, self.config).set(self.model.query.all())
 
