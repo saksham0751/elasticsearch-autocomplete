@@ -3,7 +3,7 @@ import json
 
 class CreateIndex(object):
 
-    def __init__(self, es, config, index, doc_type, max_limit, model, *args, **kwargs):
+    def __init__(self, es, config, index, doc_type, max_limit, *args, **kwargs):
         self.es = es
         self.config = config
         self.index = index
@@ -11,7 +11,6 @@ class CreateIndex(object):
         self.max_limit = max_limit
         self.args = args
         self.kwargs = kwargs
-        self.model = model
 
     def create(self):
         body = self.config['AUTOCOMPLETE_INDEX_SETTING']
